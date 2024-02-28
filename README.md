@@ -19,8 +19,6 @@ Note, that edited files in the VCS directories can be overwritten after an updat
 * [PHP: ^7.*](https://www.php.net/manual/de/mysql-xdevapi.installation.php)
 * [Maria DB: ^10.*](https://mariadb.com/de/resources/blog/installing-mariadb-10-on-centos-7-rhel-7/)
 * [Apache: ^2.4.*](https://mariadb.com/de/resources/blog/installing-mariadb-10-on-centos-7-rhel-7/)
-* [Node: ^14.*](https://nodejs.org/en/download/)
-* [npm: ^6.*](https://www.npmjs.com/get-npm)
 
 **ACF Pro**
 
