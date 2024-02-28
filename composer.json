@@ -1,0 +1,150 @@
+{
+  "name": "dark-kitt/wordpress-boilerplate",
+  "description": "A small WordPress boilerplate",
+  "type": "project",
+  "license": "MIT",
+  "version": "0.0.1",
+  "authors": [
+    {
+      "name": "dark-kitt"
+    }
+  ],
+  "repositories": {
+    "wpackagist": {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    },
+    "advanced-custom-fields/advanced-custom-fields-pro": {
+      "type": "package",
+      "package": {
+        "name": "advanced-custom-fields/advanced-custom-fields-pro",
+        "version": "5.9.5",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k=<<ACF_KEY>>&t=5.9.5"
+        }
+      }
+    },
+    "wordpress-vue.js-boilerplate": {
+      "type": "vcs",
+      "url": "https://#"
+    },
+    "wordpress-theme-configuration": {
+      "type": "vcs",
+      "url": "https://#"
+    },
+    "wordpress-mu-plugin-autoloader": {
+      "type": "vcs",
+      "url": "https://#"
+    }
+  },
+  "require": {
+    "advanced-custom-fields/advanced-custom-fields-pro": "^5.4.1",
+    "wordpress-theme-configuration": "dev-main",
+    "wordpress-mu-plugin-autoloader": "dev-main",
+    "wordpress-vue.js-boilerplate": "dev-main",
+    "roots/wordpress": "^5.3",
+    "roots/wp-password-bcrypt": "^1.0.0",
+    "vlucas/phpdotenv": "^5.3",
+    "wpackagist-plugin/acf-extended": "^0.8.5",
+    "wpackagist-plugin/acf-rgba-color-picker": "^1.2",
+    "wpackagist-plugin/jwt-authentication-for-wp-rest-api": "^1.2.6"
+  },
+  "extra": {
+    "installer-paths": {
+      "web/app/mu-plugins/{$name}/": [
+        "type:wordpress-muplugin"
+      ],
+      "web/app/plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ],
+      "web/app/themes/{$name}/": [
+        "type:wordpress-theme"
+      ]
+    },
+    "wordpress-install-dir": "web/wp"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": {
+      "dark-kitt/*": "source",
+      "*": "dist"
+    },
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "post-install-cmd": [
+      "composer run-script set-up-project;"
+    ],
+    "post-update-cmd": [
+      "composer run-script set-up-project;"
+    ],
+    "set-up-project": [
+      "if [ ! -d ./web/app/themes ]; then mkdir -p ./web/app/themes; fi",
+      "if [[ $( composer show | grep dark-kitt/vue.js-boilerplate ) ]]; then cp -r ./vendor/dark-kitt/vue.js-boilerplate ./web/app/themes/vue.js-boilerplate; fi",
+      "if [[ $( composer show | grep dark-kitt/vue.js-boilerplate ) &&  ! -d ./web/app/themes/$(basename $PWD) ]]; then composer run-script copy-base-theme; fi",
+      "if [[ $( composer show | grep dark-kitt/wordpress-theme-configuration ) ]]; then composer run-script clear-theme-configuration; fi",
+      "if [[ $( composer show | grep dark-kitt/wordpress-mu-plugin-autoloader ) ]]; then composer run-script copy-mu-autoloader; fi",
+      "if [ ! -f .env ]; then composer run-script default-env-file; fi",
+      "if [ ! -f ./web/index.php ]; then composer run-script default-index-file; fi",
+      "if [ ! -f ./web/wp-config.php ]; then composer run-script default-wp-config-file; fi",
+      "if [ ! -f ./web/.htaccess ]; then composer run-script default-htaccess-file; fi",
+      "if [ ! -d ./web/media ]; then mkdir ./web/media; chmod 755 ./web/media; echo '' > ./web/media/.gitkeep; fi",
+      "if [ ! -d ./web/storage ]; then mkdir ./web/storage; chmod 755 ./web/storage; fi",
+      "if [ ! -d ./web/storage/cache ]; then mkdir ./web/storage/cache; chmod 755 ./web/storage/cache; echo '' > ./web/storage/cache/.gitkeep; fi",
+      "if [ ! -d ./web/storage/logs ]; then mkdir ./web/storage/logs; chmod 755 ./web/storage/logs; echo '' > ./web/storage/logs/.gitkeep; fi",
+      "if [ ! -d ./web/storage/lang ]; then mkdir ./web/storage/lang; chmod 755 ./web/storage/lang; echo '' > ./web/storage/lang/.gitkeep; fi"
+    ],
+    "default-env-file": [
+      "@putenv ENV_FILE=DB_HOST='localhost'\nDB_PORT='3306'\nDB_NAME='database_name'\nDB_USER='database_user'\nDB_PASSWORD='database_password'\nDB_PREFIX='wp_'\nDB_CHARSET='utf8mb4'\nDB_COLLATE='utf8mb4_unicode_ci'\n\n# Optionally, you can use a data source name (DSN)\n# DATABASE_URL='mysql://database_user:database_password@database_host:database_port/database_name'\n\nWP_HOME='http://example.com'\nENV_SITEURL='http://api.example.com'\nWP_SITEURL=\"${ENV_SITEURL}/wp\"\n\nWP_CONTENT_DIR='/app'\nWP_CONTENT_URL=\"${ENV_SITEURL}/app\"\nWP_UPLOAD_DIR='/media'\nWP_UPLOAD_URL=\"${ENV_SITEURL}/media\"\nWP_PLUGIN_URL=\"${ENV_SITEURL}/app/plugins\"\nWP_PLUGIN_DIR='/app/plugins'\nWPMU_PLUGIN_URL=\"${ENV_SITEURL}/app/mu-plugins\"\nWPMU_PLUGIN_DIR='/app/mu-plugins'\nWP_STORAGE_DIR='/storage'\nWP_LANG_DIR=\"${WP_STORAGE_DIR}/lang\"\nWP_CACHE=true\nWP_CACHE_DIR=\"${WP_STORAGE_DIR}/cache\"\nWP_LOG_DIR=\"${WP_STORAGE_DIR}/logs\"\n\nCOMPRESS_CSS=true\nCOMPRESS_SCRIPTS=true\n\nWP_ENV='development'\nWP_DEBUG=true\nWP_DEBUG_LOG='/storage/logs/wp_error.log'\nWP_DEBUG_DISPLAY=false\nWP_DISABLE_FATAL_ERROR_HANDLER=false\nSCRIPT_DEBUG=false\n\nSMTP_HOST='smtp.domain.com'\nSMTP_AUTH=true\nSMTP_PORT=587\nSMTP_SECURE='tls'\nSMTP_USERNAME='your@username.com'\nSMTP_PASSWORD='password'\nSMTP_FROM='your@username.com'\nSMTP_FROMNAME='WordPress'\n\nAUTOMATIC_UPDATER_DISABLED=true\nDISABLE_WP_CRON=false\nDISALLOW_FILE_EDIT=true\nDISALLOW_FILE_MODS=true\nWP_POST_REVISIONS=true\n",
+      "printenv ENV_FILE > .env; curl -s https://api.wordpress.org/secret-key/1.1/salt | sed \"s/^define('\\(.*\\)',\\ *'\\(.*\\)');$/\\1='\\2'/g\" >> .env; echo '\nJWT_AUTH_SECRET_KEY=\"'$(openssl rand -base64 48)'\"\nJWT_AUTH_CORS_ENABLE=false' >> .env;"
+    ],
+    "default-index-file": [
+      "@putenv INDEX_FILE=<?php\n\ndefine(\"WP_USE_THEMES\", true);\nrequire __DIR__ . \"/wp/wp-blog-header.php\";",
+      "printenv INDEX_FILE  > ./web/index.php;"
+    ],
+    "default-wp-config-file": [
+      "@putenv CONFIG_FILE=<?php\n\n$root_dir = dirname(__DIR__);\nif (!defined(\"ABSPATH\")) define(\"ABSPATH\", $root_dir . \"/web/wp/\");\n\nrequire_once $root_dir . \"/vendor/autoload.php\";\n\n/**\n * Use Dotenv to set required environment variables and load .env file in root\n */\n$dotenv = Dotenv\\Dotenv::createUnsafeImmutable($root_dir);\nif (file_exists($root_dir . \"/.env\")) {\n\t$all_env = $dotenv->load();\n\t$dotenv->required([\"WP_HOME\", \"WP_SITEURL\", \"DB_HOST\", \"DB_NAME\", \"DB_USER\", \"DB_PASSWORD\"])->notEmpty();\n\n\tforeach ($all_env as $env_key => $env_value) {\n\t\tif ($env_key === \"DB_PREFIX\") { $table_prefix  = $env_value; continue; }\n\t\tif (preg_match(\"/_DIR$|_LOG$/\", $env_key)) { define($env_key, $root_dir . \"/web\" . $env_value); continue; }\n\t\tif ($env_value === \"true\") { define($env_key, true); continue; }\n\t\tif ($env_value === \"false\") { define($env_key, false); continue; }\n\t\tdefine($env_key, $env_value);\n\t}\n}\n\n/** define WordPress default theme */\ndefine(\"WP_DEFAULT_THEME\", basename($root_dir));\n\n/**\n * If DATABASE_URL is set replace database requirements\n */\nif (defined(\"DATABASE_URL\")) {\n\t$dsn = (object) parse_url(getenv(\"DATABASE_URL\"));\n\n\tdefine(\"DB_NAME\", substr($dsn->path, 1));\n\tdefine(\"DB_USER\", $dsn->user);\n\tdefine(\"DB_PASSWORD\", isset($dsn->pass) ? $dsn->pass : null);\n\tdefine(\"DB_HOST\", isset($dsn->port) ? \"{$dsn->host}:{$dsn->port}\" : $dsn->host);\n}\n\n/**\n * Create project database, if it does not exists\n */\n$db_host = constant(\"DB_HOST\");\n$db_port = constant(\"DB_PORT\");\n$db_name = constant(\"DB_NAME\");\n$db_user = constant(\"DB_USER\");\n$db_passwd = constant(\"DB_PASSWORD\");\n$db_charset = constant(\"DB_CHARSET\");\n$db_collate = constant(\"DB_COLLATE\");\n\n$sql_connect = new mysqli($db_host, $db_user, $db_passwd, $db_name, $db_port);\nif ($sql_connect->connect_error) {\n\n\t$sql_connect = new mysqli($db_host, $db_user, $db_passwd);\n\t$sql = \"CREATE DATABASE IF NOT EXISTS `{$db_name}` CHARACTER SET $db_charset COLLATE $db_collate\";\n\n\tif ($sql_connect->query($sql) === false) {\n\t\tdie(\"Error creating database: \" . $sql_connect->connect_error);\n\t}\n}\n$sql_connect->close();\n\n/**\n * Allow WordPress to detect HTTPS when used behind a reverse proxy or a load balancer\n * See https://codex.wordpress.org/Function_Reference/is_ssl#Notes\n */\nif (isset($_SERVER[\"HTTP_X_FORWARDED_PROTO\"]) && $_SERVER[\"HTTP_X_FORWARDED_PROTO\"] === \"https\") {\n\t$_SERVER[\"HTTPS\"] = \"on\";\n}\n\n/**\n * Include WordPress settings\n */\nrequire_once ABSPATH . \"wp-settings.php\";",
+      "printenv CONFIG_FILE > ./web/wp-config.php;"
+    ],
+    "default-htaccess-file": [
+      "@putenv HTACCESS_FILE=SetEnvIf Host ^ KITT_TLD=.dev\nSetEnvIf Host ^ KITT_SLD=domain-name\n\nphp_value upload_max_filesize 64M\nphp_value post_max_size 128M\nphp_value memory_limit 256M\nphp_value max_execution_time 300\nphp_value max_input_time 300\n\nErrorDocument 403 http://%{ENV:KITT_SLD}%{ENV:KITT_TLD}/403\nErrorDocument 404 http://%{ENV:KITT_SLD}%{ENV:KITT_TLD}/404\nErrorDocument 500 http://%{ENV:KITT_SLD}%{ENV:KITT_TLD}/500\n\n<IfModule mod_rewrite.c>\n\n\tRewriteEngine On\n\tRewriteBase /\n\n\t# authorization for JWT\n\tRewriteCond %{HTTP:Authorization} ^(.*)\n\tRewriteRule (.*) - [E=HTTP_AUTHORIZATION:%1]\n\n\t# redirect backend\n\tRewriteRule ^(|wp|wp/|wp-admin|wp-admin/)$ wp/wp-login.php [L,R=301]\n\n\t# redirect to REST API\n\tRewriteRule ^(wp-json/.*)$ index.php/$1 [L,QSA]\n\n</IfModule>",
+      "printenv HTACCESS_FILE > ./web/.htaccess;"
+    ],
+    "clear-theme-configuration": [
+      "if [ -f ./web/app/mu-plugins/wordpress-theme-configuration/.gitignore ]; then rm -f ./web/app/mu-plugins/wordpress-theme-configuration/.gitignore; fi",
+      "if [ -d ./web/app/mu-plugins/wordpress-theme-configuration/.git ]; then rm -rf ./web/app/mu-plugins/wordpress-theme-configuration/.git; fi",
+      "if [ -f ./web/app/mu-plugins/wordpress-theme-configuration/composer.json ]; then rm -f ./web/app/mu-plugins/wordpress-theme-configuration/composer.json; fi"
+    ],
+    "copy-mu-autoloader": [
+      "if [ -f ./web/app/mu-plugins/wordpress-mu-plugin-autoloader/mu-plugin-autoloader.php ]; then cp ./web/app/mu-plugins/wordpress-mu-plugin-autoloader/mu-plugin-autoloader.php ./web/app/mu-plugins/mu-plugin-autoloader.php; fi",
+      "if [ -f ./web/app/mu-plugins/wordpress-mu-plugin-autoloader/.gitignore ]; then rm -f ./web/app/mu-plugins/wordpress-mu-plugin-autoloader/.gitignore; fi",
+      "if [ -d ./web/app/mu-plugins/wordpress-mu-plugin-autoloader/.git ]; then rm -rf ./web/app/mu-plugins/wordpress-mu-plugin-autoloader/.git; fi",
+      "if [ -f ./web/app/mu-plugins/wordpress-mu-plugin-autoloader/composer.json ]; then rm -f ./web/app/mu-plugins/wordpress-mu-plugin-autoloader/composer.json; fi"
+    ],
+    "copy-base-theme": [
+      "if [ -f ./web/app/themes/vue.js-boilerplate/.gitignore ]; then rm -f ./web/app/themes/vue.js-boilerplate/.gitignore; fi",
+      "if [ -d ./web/app/themes/vue.js-boilerplate/.git ]; then rm -rf ./web/app/themes/vue.js-boilerplate/.git; fi",
+      "if [ -f ./web/app/themes/vue.js-boilerplate/composer.json ]; then rm -f ./web/app/themes/vue.js-boilerplate/composer.json; fi",
+      "name=$(basename $PWD); if [[ -d ./web/app/themes/vue.js-boilerplate && ! -d ./web/app/themes/$name ]]; then cp -r ./web/app/themes/vue.js-boilerplate ./web/app/themes/$name; fi",
+      "name=$(basename $PWD); if [ ! -f ./web/app/themes/$name/style.css ]; then echo \"/**\n * Theme Name: ${name}\n * Author: dark-kitt\n * Author URI: https://#\n */\" > ./web/app/themes/$name/style.css; fi",
+      "name=$(basename $PWD); if [ ! -f ./web/app/themes/$name/header.php ]; then echo \"<!DOCTYPE html>\n<html>\n\t<head>\n\t\t<meta charset=\"utf-8\"/>\n\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1\"/>\n\t\t<title>Vue.js WordPress Theme</title>\n\t</head>\n\t<body>\n\t\t<header></header>\" > ./web/app/themes/$name/header.php; fi",
+      "name=$(basename $PWD); if [ ! -f ./web/app/themes/$name/index.php ]; then echo \"<main></main>\" > ./web/app/themes/$name/index.php; fi",
+      "name=$(basename $PWD); if [ ! -f ./web/app/themes/$name/footer.php ]; then echo \"\t\t<footer></footer>\n\t</body>\n</html>\" > ./web/app/themes/$name/footer.php; fi",
+      "name=$(basename $PWD); if [ ! -f ./web/app/themes/$name/functions.php ]; then cp ./web/app/mu-plugins/wordpress-theme-configuration/example.functions.php ./web/app/themes/$name/functions.php; fi"
+    ],
+    "htpasswd-web": [
+      "@putenv HT_HEADER=\n\nAuthType Basic\nAuthName \"restricted area\"",
+      "@putenv HT_FOOTER=require valid-user",
+      "if [ ! -f ./web/.htpasswd ]; then htpasswd -b -c ./web/.htpasswd user password; chmod 644 ./web/.htpasswd; printenv HT_HEADER >> ./web/.htaccess; echo \"AuthUserFile ${PWD}/web/.htpasswd\" >> ./web/.htaccess; printenv HT_FOOTER >> ./web/.htaccess; fi"
+    ],
+    "htpasswd-www": [
+      "@putenv HT_HEADER=\n\nAuthType Basic\nAuthName \"restricted area\"",
+      "@putenv HT_FOOTER=require valid-user",
+      "name=$(basename $PWD); path=./web/app/themes/$name/www; if [ ! -f $path/.htpasswd ]; then htpasswd -b -c $path/.htpasswd user password; chmod 644 $path/.htpasswd; printenv HT_HEADER >> $path/.htaccess; echo \"AuthUserFile ${PWD}/web/app/themes/$name/www/.htpasswd\" >> $path/.htaccess; printenv HT_FOOTER >> $path/.htaccess; fi"
+    ]
+  }
+}
