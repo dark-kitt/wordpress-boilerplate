@@ -2,7 +2,7 @@
   "name": "dark-kitt/wordpress-boilerplate",
   "description": "A small WordPress boilerplate",
   "type": "project",
-  "license": "MIT",
+  "license": "CC_BY-SA_4.0_DEED",
   "version": "0.0.1",
   "authors": [
     {
@@ -43,7 +43,7 @@
     "advanced-custom-fields/advanced-custom-fields-pro": "^5.4.1",
     "wordpress-theme-configuration": "dev-main",
     "wordpress-mu-plugin-autoloader": "dev-main",
-    "wordpress-vue.js-boilerplate": "dev-main",
+    "wordpress-boilerplate": "dev-main",
     "roots/wordpress": "^5.3",
     "roots/wp-password-bcrypt": "^1.0.0",
     "vlucas/phpdotenv": "^5.3",

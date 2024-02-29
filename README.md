@@ -214,7 +214,7 @@ default-htaccess-file creates the default ***.htaccess*** file in the *`/web/`* 
 
 ## License
 
-[![](https://upload.wikimedia.org/wikipedia/commons/e/e5/CC_BY-SA_icon.svg)](https://creativecommons.org/licenses/by-sa/2.0/)
+[![](https://upload.wikimedia.org/wikipedia/commons/e/e5/CC_BY-SA_icon.svg)](https://creativecommons.org/licenses/by-sa/4.0)
 
 ---
 
