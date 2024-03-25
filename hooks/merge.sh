@@ -8,7 +8,7 @@ do
   fi
 done
 
-if [ $MERGE_REQUIRED ]; then
+if [[ $MERGE_REQUIRED == true ]]; then
   echo "read ./scripts directory ..."
   # ignore system and other files
   ignore=("." ".." "read-write-files.sh")
@@ -76,8 +76,9 @@ if [ $MERGE_REQUIRED ]; then
   sed -i '' -e 's/X_ESCAPE/\\/g' composer.json
   # add composer.json to commit
   git add composer.json
+  #! NOTE: $(git commit) is not working while merging branches
+  # git commit -F composer.json -m "fix(composer): ~ script/s were updated"
 
   echo "done."
-  exit 0
 fi
 exit 0
