@@ -1,5 +1,5 @@
 <?php
-// test merge
+
 $root_dir = dirname(__DIR__);
 if (!defined("ABSPATH")) define("ABSPATH", $root_dir . "/web/wp/");
 
