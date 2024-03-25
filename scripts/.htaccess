@@ -1,3 +1,4 @@
+# test merge
 SetEnvIf Host ^ KITT_TLD=.dev
 SetEnvIf Host ^ KITT_SLD=domain-name
 
