@@ -45,7 +45,7 @@ If you need a tiny Docker setup to test the project, checkout my [Docker PHP:8.2
 
 **Custom Hooks**
 
-To work with the custom hook directory, you need to set the **`hooksPath`** inside the **`git config`**, by each clone. To do so, you need to call the follwing script. Afterwards, you can work with custom GutHub hooks inside the *`./hooks`* directory.
+To work with the custom hook directory, you need to set the **`hooksPath`** inside the **`git config`**, after each clone. To do so, you need to call the follwing script. Afterwards, you can work with custom GutHub hooks inside the *`./hooks`* directory.
 ```shell
 git config core.hooksPath hooks
 ```
