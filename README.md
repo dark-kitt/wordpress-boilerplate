@@ -82,37 +82,75 @@ composer show -i (installed packages)
 
 **vhosts.conf**
 ```apacheconf
+# Tiny example vhosts config file
 <VirtualHost *:80>
-    ServerName api.example.dev
-    ServerAlias www.api.example.dev
+  ServerName api.example.kitt
+  ServerAlias www.api.example.kitt
+  ServerAdmin webmaster@localhost
 
-    DocumentRoot /path/to/example/web
+  DocumentRoot /var/www/html/web
+  <Directory /var/www/html/web>
+    Options Indexes FollowSymlinks
+    AllowOverride All
+    Require all granted
+  </Directory>
 
-    <Directory /path/to/example/web>
-        Options Indexes FollowSymlinks
-        AllowOverride All
-        Require all granted
-    </Directory>
-
-    ErrorLog /var/log/httpd/error_log
-    CustomLog /var/log/httpd/access_log combined
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 
 <VirtualHost *:80>
-    ServerName example.dev
-    ServerAlias www.example.dev
+  ServerName example.kitt
+  ServerAlias www.example.kitt
+  ServerAdmin webmaster@localhost
 
-    DocumentRoot /path/to/example/web/app/themes
+  DocumentRoot /var/www/html/web/app/themes
+  <Directory /var/www/html/web/app/themes>
+    Options Indexes FollowSymlinks
+    AllowOverride All
+    Require all granted
+  </Directory>
 
-    <Directory /path/to/example/web/app/themes>
-        Options Indexes FollowSymlinks
-        AllowOverride All
-        Require all granted
-    </Directory>
-
-    ErrorLog /var/log/httpd/error_log
-    CustomLog /var/log/httpd/access_log combined
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
+# Create custom local domain HTTPS
+# NOTE: mkcert is required
+# https://github.com/FiloSottile/mkcert
+# Create ./ssl directory and run inside => mkcert localhost 127.0.0.1 ::1 example.kitt \*.example.kitt
+# Add the new certificates => mkcert -install
+# Don't forget to set up the local /etc/hosts file => 127.0.0.1 example.kitt api.example.kitt
+# <VirtualHost *:443>
+#   # example.kitt:8443
+#   ServerName example.kitt
+#   ServerAlias www.example.kitt
+
+#   SSLEngine on
+#   SSLCertificateFile /var/www/html/ssl/cert.pem
+#   SSLCertificateKeyFile /var/www/html/ssl/key.pem
+
+#   ServerAdmin webmaster@localhost
+#   DocumentRoot /var/www/html/web/app/themes
+
+#   ErrorLog ${APACHE_LOG_DIR}/error.log
+#   CustomLog ${APACHE_LOG_DIR}/access.log combined
+# </VirtualHost>
+
+# <VirtualHost *:443>
+#   # api.example.kitt:8443
+#   ServerName api.example.kitt
+#   ServerAlias www.api.example.kitt
+
+#   SSLEngine on
+#   SSLCertificateFile /var/www/html/ssl/cert.pem
+#   SSLCertificateKeyFile /var/www/html/ssl/key.pem
+
+#   ServerAdmin webmaster@localhost
+#   DocumentRoot /var/www/html/web
+
+#   ErrorLog ${APACHE_LOG_DIR}/error.log
+#   CustomLog ${APACHE_LOG_DIR}/access.log combined
+# </VirtualHost>
 ```
 
 ---
@@ -217,7 +255,6 @@ composer clear-theme-configuration
 
 deletes all **Git** and **Composer** data in the *`app/mu-plugin/wordpress-theme-configuration`* directory if they exist.
 
----
 ---
 ---
 
