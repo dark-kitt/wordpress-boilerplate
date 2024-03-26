@@ -90,7 +90,7 @@
       "if [ ! -d ./web/app/themes ]; then mkdir -p ./web/app/themes; fi",
       "if [[ $( composer show | grep dark-kitt/wordpress-theme-vue ) &&  ! -d ./web/app/themes/$(basename $PWD) ]]; then composer run-script default-base-theme-files && composer run-script clear-base-theme; fi",
       "if [[ $( composer show | grep dark-kitt/wordpress-theme-configuration ) ]]; then composer run-script clear-theme-configuration; fi",
-      "if [[ $( composer show | grep dark-kitt/wordpress-mu-plugin-autoloader ) ]]; then cp ./web/app/mu-plugins/wordpress-mu-plugin-autoloader/mu-plugin-autoloader.php ./web/app/mu-plugins/mu-plugin-autoloader.php && composer run-script clear-mu-autoloader; fi",
+      "if [[ $( composer show | grep dark-kitt/wordpress-mu-plugin-autoloader ) ]]; then mv ./web/app/mu-plugins/wordpress-mu-plugin-autoloader/mu-plugin-autoloader.php ./web/app/mu-plugins/mu-plugin-autoloader.php && composer run-script clear-mu-autoloader; fi",
       "if [ ! -f .env ]; then composer run-script default-env-file; fi",
       "if [ ! -f ./web/index.php ]; then composer run-script default-index-file; fi",
       "if [ ! -f ./web/wp-config.php ]; then composer run-script default-wp-config-file; fi",
@@ -127,9 +127,7 @@
       "if [ -f ./web/app/mu-plugins/wordpress-theme-configuration/composer.json ]; then rm -f ./web/app/mu-plugins/wordpress-theme-configuration/composer.json; fi"
     ],
     "clear-mu-autoloader": [
-      "if [ -f ./web/app/mu-plugins/wordpress-mu-plugin-autoloader/.gitignore ]; then rm -f ./web/app/mu-plugins/wordpress-mu-plugin-autoloader/.gitignore; fi",
-      "if [ -d ./web/app/mu-plugins/wordpress-mu-plugin-autoloader/.git ]; then rm -rf ./web/app/mu-plugins/wordpress-mu-plugin-autoloader/.git; fi",
-      "if [ -f ./web/app/mu-plugins/wordpress-mu-plugin-autoloader/composer.json ]; then rm -f ./web/app/mu-plugins/wordpress-mu-plugin-autoloader/composer.json; fi"
+      "if [[ -d ./web/app/mu-plugins/wordpress-mu-plugin-autoloader && -f ./web/app/mu-plugins/mu-plugin-autoloader.php ]]; then rm -rf ./web/app/mu-plugins/wordpress-mu-plugin-autoloader; fi"
     ],
     "clear-base-theme": [
       "name=$(basename $PWD); if [ -f ./web/app/themes/$name/.gitignore ]; then rm -f ./web/app/themes/$name/.gitignore; fi",

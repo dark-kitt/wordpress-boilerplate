@@ -245,7 +245,7 @@ deletes all **Git** and **Composer** data in the copy of the **[base Vue.js them
 composer clear-mu-autoloader
 ```
 
-deletes all **Git** and **Composer** data in the *`app/mu-plugin/wordpress-mu-plugin-autoloader`* directory if they exist.
+deletes the **[Autoloader MU-Plugin](https://github.com/dark-kitt/wordpress-mu-plugin-autoloader)** in the *`app/mu-plugin`* directory, but **not** the *`mu-plugin-autoloader.php`* file in the same directory.
 
 ---
 
