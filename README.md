@@ -43,6 +43,13 @@ The secret key in the .env file for **JWT Authentication for WP REST API** is cr
 
 If you need a tiny Docker setup to test the project, checkout my [Docker PHP:8.2-Apache MySQL](https://github.com/dark-kitt/docker-php-apache-mysql) repo.
 
+**Custom Hooks**
+
+To work with the custom hook directory, you need to set the **`hooksPath`** inside the **`git config`**, by each clone. To do so, you need to call the follwing script. Afterwards, you can work with custom GutHub hooks inside the *`./hooks`* directory.
+```shell
+git config core.hooksPath hooks
+```
+
 ---
 
 ## Installation
