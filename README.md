@@ -39,6 +39,10 @@ The **WordPress Salts** in the .env file are fetched and placed automatically.
 
 The secret key in the .env file for **JWT Authentication for WP REST API** is created and placed automatically, for each project / install. Note, it is optional to use the **custom WordPress REST API** from the [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin.
 
+**Docker**
+
+If you need a tiny Docker setup to test the project, checkout my [Docker PHP:8.2-Apache MySQL](https://github.com/dark-kitt/docker-php-apache-mysql) repo.
+
 ---
 
 ## Installation
