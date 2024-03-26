@@ -1,5 +1,5 @@
 # **WordPress Boilerplate**
-Project: [**Part 1**](#), [Part 2](#), [Part 3](#)
+Project: [**Part 1**](https://github.com/dark-kitt/wordpress-boilerplate/tree/main), [Part 2](https://github.com/dark-kitt/wordpress-theme-configuration), [Part 3](https://github.com/dark-kitt/wordpress-theme-vue)
 
 ---
 
@@ -7,9 +7,9 @@ Project: [**Part 1**](#), [Part 2](#), [Part 3](#)
 
 This Composer configuration creates a preconfigured WordPress Back-End.
 
-The Back-End is basically configured by a "**must use plugin**" (*`app/mu-plugin/wordpress-theme-configuration`*) and the ***.env*** file in the root directory. Composer creates a copy of a [base Vue.js theme](#) (*`app/mu-plugin/wordpress-vuejs-theme`*) with the same name as the root directory. This theme directory will be the working directory for the custom WordPress theme.
+The Back-End is basically configured by a "**[must use plugin](https://github.com/dark-kitt/wordpress-theme-configuration)**" (*`app/mu-plugin/wordpress-theme-configuration`*) and the ***.env*** file in the root directory. Composer creates a copy of a [base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue) (*`app/themes/wordpress-theme-vue`*) with the same name as the root directory. This theme directory will be the working directory for the custom WordPress theme.
 
-The **[base Vue.js theme](#)** and the  WordPress base configuration "must use plugin" are loaded from a **private repository** (VCS | Version Control System). Additionally, to load MU-Plugins from subdirectories Composer adds an **autoloader for MU-Plugins** (*`app/mu-plugin/wordpress-mu-plugin-autoloader`*), which is also loaded from a private repository. WordPress only looks for PHP files right inside the MU-Plugins directory, and not for files in subdirectories (unlike for normal plugins).
+The **[base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue)** and the  WordPress base configuration "must use plugin" are loaded from a **private repository** (VCS | Version Control System). Additionally, to load MU-Plugins from subdirectories Composer adds an **[autoloader for MU-Plugins](https://github.com/dark-kitt/wordpress-mu-plugin-autoloader)** (*`app/mu-plugin/wordpress-mu-plugin-autoloader`*), which is also loaded from a private repository. WordPress only looks for PHP files right inside the MU-Plugins directory, and not for files in subdirectories (unlike for normal plugins).
 
 Note, that edited files in the VCS directories can be overwritten after an update. Useful plugins and Composer scripts are available or editable inside the composer.json file.
 
@@ -37,7 +37,7 @@ The **WordPress Salts** in the .env file are fetched and placed automatically.
 
 **JWT Authentication**
 
-The secret key in the .env file for **JWT Authentication for WP REST API** is created and placed automatically, for each project / install. Note, it is optional to use the **custom WordPress REST API** from the [wordpress-theme-configuration](#) MU-Plugin.
+The secret key in the .env file for **JWT Authentication for WP REST API** is created and placed automatically, for each project / install. Note, it is optional to use the **custom WordPress REST API** from the [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin.
 
 ---
 
@@ -80,15 +80,15 @@ composer clear-cache
 composer show -i (installed packages)
 ```
 
-**vhosts.conf** (example Apache vhosts.conf configuration on Amazon Linux 2 - EC2)
+**vhosts.conf**
 ```apacheconf
 <VirtualHost *:80>
     ServerName api.example.dev
     ServerAlias www.api.example.dev
 
-    DocumentRoot /path/to/example/web/
+    DocumentRoot /path/to/example/web
 
-    <Directory /path/to/example/web/>
+    <Directory /path/to/example/web>
         Options Indexes FollowSymlinks
         AllowOverride All
         Require all granted
@@ -102,9 +102,9 @@ composer show -i (installed packages)
     ServerName example.dev
     ServerAlias www.example.dev
 
-    DocumentRoot /path/to/example/web/app/themes/copy-of-base-theme/www/
+    DocumentRoot /path/to/example/web/app/themes
 
-    <Directory /path/to/example/web/app/themes/copy-of-base-theme/www/>
+    <Directory /path/to/example/web/app/themes>
         Options Indexes FollowSymlinks
         AllowOverride All
         Require all granted
@@ -121,9 +121,9 @@ composer show -i (installed packages)
 
 Replace the existing default values with your specific project configuration. The **WordPress Salts** and the secret key for **JWT Authentication for WP REST API** are created and placed automatically (keys for each installation).
 
-Note, the secret key for **JWT Authentication for WP REST API** is required for the **custom WordPress REST API** [wordpress-theme-configuration](#) MU-Plugin. If you won't use the **custom WordPress REST API** Method from the **wordpress-theme-configuration** MU-Plugin, you can ignore the secret key or use it on your own.
+Note, the secret key for **JWT Authentication for WP REST API** is required for the **custom WordPress REST API** [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin. If you won't use the **custom WordPress REST API** Method from the **wordpress-theme-configuration** MU-Plugin, you can ignore the secret key or use it on your own.
 
-Note additionally, if you use the example Apache configuration above `WP_HOME` (http://example.dev) can not be equal to `WP_SITEURL` (http://api.example.dev/wp), because of the custom WordPress REST API, which is defined by the [wordpress-theme-configuration](#) MU-Plugin. The `ENV_SITEURL` (http://api.example.dev/) constant is used to configure other additional stuff.
+Note additionally, if you use the example Apache configuration above `WP_HOME` (http://example.dev) can not be equal to `WP_SITEURL` (http://api.example.dev/wp), because of the custom WordPress REST API, which is defined by the [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin. The `ENV_SITEURL` (http://api.example.dev/) constant is used to configure other additional stuff.
 
 Don't forget to edit the ***.htacces*** file (KITT_TLD and KITT_SLD constants).
 
@@ -151,31 +151,7 @@ Note, don't push your ***.htpasswd*** and ***.htacces*** files with your local *
 composer set-up-project
 ```
 
-set-up-project creates *`.env`*, *`./web/index.php`*, *`./web/wp-config.php`*, *`./web/.htaccess`*, *`./web/media`*, *`./web/storage`*, *`./web/storage/cache`*, *`./web/storage/logs`* and *`./web/storage/lang`*, if they are don't exists. Additionally, the script will execute the **copy-base-theme**, **clear-theme-configuration** and **copy-mu-autoloader** scripts, if they are installed.
-
----
-
-```shell
-composer copy-base-theme
-```
-
-copy-base-theme copies the [wordpress-vuejs-theme](#) in the /themes directory of WordPress (same directory), with the name of the root project directory, if it doesn't exist. Additionally, it creates the required **style.css** file for© the WordPress theme and deletes all **Git** and **Composer** data.
-
----
-
-```shell
-composer copy-mu-autoloader
-```
-
-copy-mu-autoloader copies the ***mu-plugin-autoloader.php*** in the /mu-plugins directory of WordPress if the file exists and deletes all **Git** and **Composer** data.
-
----
-
-```shell
-composer clear-theme-configuration
-```
-
-clear-theme-configuration deletes all **Git** and **Composer** data in the *`app/mu-plugin/wordpress-theme-configuration`* directory if they exist.
+set-up-project creates *`.env`*, *`./web/index.php`*, *`./web/wp-config.php`*, *`./web/.htaccess`*, *`./web/media`*, *`./web/storage`*, *`./web/storage/cache`*, *`./web/storage/logs`* and *`./web/storage/lang`*, if they are don't exists. Additionally, the script will execute the **clear-base-theme**, **clear-theme-configuration** and **clear-mu-autoloader** scripts, if the plugins are installed.
 
 ---
 
@@ -183,7 +159,7 @@ clear-theme-configuration deletes all **Git** and **Composer** data in the *`app
 composer default-env-file
 ```
 
-default-env-file creates the default ***.env*** in the root directory of this project. Note, if a ***.env*** file already exists, this script will overwrite the existing one.
+creates the default ***.env*** in the root directory of this project. Note, if a ***.env*** file already exists, this script will overwrite the existing one.
 
 ---
 
@@ -191,7 +167,7 @@ default-env-file creates the default ***.env*** in the root directory of this pr
 composer default-index-file
 ```
 
-default-index-file creates the default ***index.php*** file in the *`/web/`* directory of this project. Note, if an ***index.php*** file already exists, this script will overwrite the existing one.
+creates the default ***index.php*** file in the *`/web/`* directory of this project. Note, if an ***index.php*** file already exists, this script will overwrite the existing one.
 
 ---
 
@@ -199,7 +175,7 @@ default-index-file creates the default ***index.php*** file in the *`/web/`* dir
 composer default-wp-config-file
 ```
 
-default-wp-config-file creates the default ***wp-config.php*** file in the *`/web/`* directory of this project. Note, if a ***wp-config.php*** file already exists, this script will overwrite the existing one.
+creates the default ***wp-config.php*** file in the *`/web/`* directory of this project. Note, if a ***wp-config.php*** file already exists, this script will overwrite the existing one.
 
 ---
 
@@ -207,8 +183,41 @@ default-wp-config-file creates the default ***wp-config.php*** file in the *`/we
 composer default-htaccess-file
 ```
 
-default-htaccess-file creates the default ***.htaccess*** file in the *`/web/`* directory of this project. Note, if a ***.htaccess*** file already exists, this script will overwrite the existing one.
+creates the default ***.htaccess*** file in the *`/web/`* directory of this project. Note, if a ***.htaccess*** file already exists, this script will overwrite the existing one.
 
+---
+
+```shell
+composer default-base-theme-files
+```
+
+copies the **[base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue)** into the same directory (*`app/themes/$name`*) with the name as the root directory. Afterwards, it creates all necessary default files for WordPress if they don't already exist.
+
+---
+
+```shell
+composer clear-base-theme
+```
+
+deletes all **Git** and **Composer** data in the copy of the **[base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue)** directory (*`app/themes/$name`*) if they exist.
+
+---
+
+```shell
+composer clear-mu-autoloader
+```
+
+deletes all **Git** and **Composer** data in the *`app/mu-plugin/wordpress-mu-plugin-autoloader`* directory if they exist.
+
+---
+
+```shell
+composer clear-theme-configuration
+```
+
+deletes all **Git** and **Composer** data in the *`app/mu-plugin/wordpress-theme-configuration`* directory if they exist.
+
+---
 ---
 ---
 
@@ -226,6 +235,6 @@ default-htaccess-file creates the default ***.htaccess*** file in the *`/web/`* 
 * [Advanced Custom Fields: Pro](https://www.advancedcustomfields.com/pro/)
 * [Advanced Custom Fields: Extended](https://wordpress.org/plugins/acf-extended/)
 * [JWT Authentication for WP REST API](https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/)
-* [dark-kitt / wordpress-vuejs-theme](#)
+* [dark-kitt / wordpress-theme-vue](#)
 * [dark-kitt / wordpress-theme-configuration](#)
 * [dark-kitt / wordpress-wp-mu-plugin-autoloader](#)
