@@ -8,7 +8,9 @@ do
   fi
 done
 
-if [[ $MERGE_REQUIRED == true ]]; then
+CURRENT_BRANCH=$(git branch --show-current)
+
+if [[ $MERGE_REQUIRED == true && $CURRENT_BRANCH == 'main' ]]; then
   echo "read ./scripts directory ..."
   # ignore system and other files
   ignore=("." ".." "read-write-files.sh")
