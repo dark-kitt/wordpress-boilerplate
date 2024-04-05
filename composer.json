@@ -102,16 +102,16 @@
       "if [ ! -d ./web/storage/lang ]; then mkdir ./web/storage/lang; chmod 755 ./web/storage/lang; echo '' > ./web/storage/lang/.gitkeep; fi"
     ],
     "default-env-file": [
-      "chmod +x ./scripts/read-write-files.sh && ./scripts/read-write-files.sh .env ./.env"
+      "chmod +x ./scripts/read-write-files.sh && ./scripts/read-write-files.sh .env ./.env;"
     ],
     "default-index-file": [
-      "chmod +x ./scripts/read-write-files.sh && ./scripts/read-write-files.sh index.php ./web/index.php"
+      "chmod +x ./scripts/read-write-files.sh && ./scripts/read-write-files.sh index.php ./web/index.php;"
     ],
     "default-wp-config-file": [
-      "chmod +x ./scripts/read-write-files.sh && ./scripts/read-write-files.sh wp-config.php ./web/wp-config.php"
+      "chmod +x ./scripts/read-write-files.sh && ./scripts/read-write-files.sh wp-config.php ./web/wp-config.php;"
     ],
     "default-htaccess-file": [
-      "chmod +x ./scripts/read-write-files.sh && ./scripts/read-write-files.sh .htaccess ./web/.htaccess"
+      "chmod +x ./scripts/read-write-files.sh && ./scripts/read-write-files.sh .htaccess ./web/.htaccess;"
     ],
     "default-base-theme-files": [
       "name=$(basename $PWD); if [[ -d ./web/app/themes/wordpress-theme-vue && ! -d ./web/app/themes/$name ]]; then cp -r ./web/app/themes/wordpress-theme-vue ./web/app/themes/$name && rm -rf ./web/app/themes/wordpress-theme-vue; fi",
