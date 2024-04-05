@@ -49,7 +49,7 @@ $db_charset = constant("DB_CHARSET");
 $db_collate = constant("DB_COLLATE");
 
 /**
- * Set database privileges for DB_USER
+ * Don't forget to set the database privileges for DB_USER
  */
 try {
 	$sql_connect = new mysqli($db_host, $db_user, $db_passwd, $db_name, $db_port);
