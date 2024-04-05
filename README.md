@@ -176,6 +176,8 @@ Note additionally, if you use the example Apache configuration above `WP_HOME` (
 
 Don't forget to edit the ***.htacces*** file (KITT_TLD and KITT_SLD constants).
 
+Note, the `WP_DEBUG_LOG` constant is set to `/storage/logs/wp_error.log` if you use docker and want to see the WordPress error logs after you call the `docker logs -f <container> >/dev/null` command for php logs. Set the path to `/dev/stderr` and the WordPress error logs should be visible.
+
 ---
 
 ## Scripts
