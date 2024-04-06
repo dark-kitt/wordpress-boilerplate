@@ -10,16 +10,28 @@ require_once $root_dir . "/vendor/autoload.php";
  */
 $dotenv = Dotenv\Dotenv::createUnsafeImmutable($root_dir);
 if (file_exists($root_dir . "/.env")) {
-	$all_env = $dotenv->load();
-	$dotenv->required(["WP_HOME", "WP_SITEURL", "DB_HOST", "DB_NAME", "DB_USER", "DB_PASSWORD"])->notEmpty();
+  $all_env = $dotenv->load();
+  $dotenv->required(["WP_HOME", "WP_SITEURL", "DB_HOST", "DB_NAME", "DB_USER", "DB_PASSWORD"])->notEmpty();
 
-	foreach ($all_env as $env_key => $env_value) {
-		if ($env_key === "DB_PREFIX") { $table_prefix  = $env_value; continue; }
-		if (preg_match("/_DIR$|_LOG$/", $env_key)) { define($env_key, $root_dir . "/web" . $env_value); continue; }
-		if ($env_value === "true") { define($env_key, true); continue; }
-		if ($env_value === "false") { define($env_key, false); continue; }
-		define($env_key, $env_value);
-	}
+  foreach ($all_env as $env_key => $env_value) {
+    if ($env_key === "DB_PREFIX") {
+      $table_prefix  = $env_value;
+      continue;
+    }
+    if (preg_match("/_DIR$|_LOG$/", $env_key)) {
+      define($env_key, $root_dir . "/web" . $env_value);
+      continue;
+    }
+    if ($env_value === "true") {
+      define($env_key, true);
+      continue;
+    }
+    if ($env_value === "false") {
+      define($env_key, false);
+      continue;
+    }
+    define($env_key, $env_value);
+  }
 }
 
 /** define WordPress default theme */
@@ -29,12 +41,12 @@ define("WP_DEFAULT_THEME", basename($root_dir));
  * If DATABASE_URL is set replace database requirements
  */
 if (defined("DATABASE_URL")) {
-	$dsn = (object) parse_url(getenv("DATABASE_URL"));
+  $dsn = (object) parse_url(getenv("DATABASE_URL"));
 
-	define("DB_NAME", substr($dsn->path, 1));
-	define("DB_USER", $dsn->user);
-	define("DB_PASSWORD", isset($dsn->pass) ? $dsn->pass : null);
-	define("DB_HOST", isset($dsn->port) ? "{$dsn->host}:{$dsn->port}" : $dsn->host);
+  define("DB_NAME", substr($dsn->path, 1));
+  define("DB_USER", $dsn->user);
+  define("DB_PASSWORD", isset($dsn->pass) ? $dsn->pass : null);
+  define("DB_HOST", isset($dsn->port) ? "{$dsn->host}:{$dsn->port}" : $dsn->host);
 }
 
 /**
@@ -49,18 +61,19 @@ $db_charset = constant("DB_CHARSET");
 $db_collate = constant("DB_COLLATE");
 
 /**
- * Don't forget to set the database privileges for DB_USER
+ * Before you start to install WordPress
+ * set the database privileges for DB_USER
  */
 try {
-	$sql_connect = new mysqli($db_host, $db_user, $db_passwd, $db_name, $db_port);
-	$sql_connect->close();
+  $sql_connect = new mysqli($db_host, $db_user, $db_passwd, $db_name, $db_port);
+  $sql_connect->close();
 } catch (\Throwable $th) {
-	$sql_connect = new mysqli($db_host, $db_user, $db_passwd);
-	$sql = "CREATE DATABASE IF NOT EXISTS `{$db_name}` CHARACTER SET $db_charset COLLATE $db_collate";
-	
-	if ($sql_connect->query($sql) === false) {
-		die("Error creating database: " . $sql_connect->connect_error);
-	}
+  $sql_connect = new mysqli($db_host, $db_user, $db_passwd);
+  $sql = "CREATE DATABASE IF NOT EXISTS `{$db_name}` CHARACTER SET $db_charset COLLATE $db_collate";
+
+  if ($sql_connect->query($sql) === false) {
+    die("Error creating database: " . $sql_connect->connect_error);
+  }
 }
 
 /**
@@ -68,7 +81,7 @@ try {
  * See https://codex.wordpress.org/Function_Reference/is_ssl#Notes
  */
 if (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"] === "https") {
-	$_SERVER["HTTPS"] = "on";
+  $_SERVER["HTTPS"] = "on";
 }
 
 /**
