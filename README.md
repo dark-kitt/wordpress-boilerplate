@@ -5,9 +5,9 @@ Project: [**Part 1**](https://github.com/dark-kitt/wordpress-boilerplate/tree/ma
 
 ## Introduction
 
-This Composer configuration creates a preconfigured WordPress Back-End.
+This Composer configuration creates a preconfigured WordPress backend.
 
-The Back-End is basically configured by a "**[must use plugin](https://github.com/dark-kitt/wordpress-theme-configuration)**" (*`app/mu-plugin/wordpress-theme-configuration`*) and the ***.env*** file in the root directory. Composer creates a copy of a [base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue) (*`app/themes/wordpress-theme-vue`*) with the same name as the root directory. This theme directory will be the working directory for the custom WordPress theme.
+The backend is basically configured by a "**[must use plugin](https://github.com/dark-kitt/wordpress-theme-configuration)**" (*`app/mu-plugin/wordpress-theme-configuration`*) and the ***.env*** file in the root directory. Composer creates a copy of a [base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue) (*`app/themes/wordpress-theme-vue`*) with the same name as the root directory. This theme directory will be the working directory for the custom WordPress theme.
 
 The **[base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue)** and the  WordPress base configuration "must use plugin" are loaded from a **private repository** (VCS | Version Control System). Additionally, to load MU-Plugins from subdirectories Composer adds an **[autoloader for MU-Plugins](https://github.com/dark-kitt/wordpress-mu-plugin-autoloader)** (*`app/mu-plugin/wordpress-mu-plugin-autoloader`*), which is also loaded from a private repository. WordPress only looks for PHP files right inside the MU-Plugins directory, and not for files in subdirectories (unlike for normal plugins).
 
@@ -45,7 +45,7 @@ If you need a tiny Docker setup to test the project, checkout my [Docker PHP:8.2
 
 **Custom Hooks**
 
-To work with the custom hook directory, you need to set the **`hooksPath`** inside the **`git config`**, after each clone. To do so, you need to call the follwing script. Afterwards, you can work with custom GutHub hooks inside the *`./hooks`* directory.
+To work with the custom hook directory, you need to set the **`hooksPath`** inside the **`git config`**, after each clone. To do so, you need to call the follwing command. Afterwards, you can work with custom GutHub hooks inside the *`./hooks`* directory.
 ```shell
 git config core.hooksPath hooks
 ```
@@ -176,7 +176,7 @@ Note additionally, if you use the example Apache configuration above `WP_HOME` (
 
 Don't forget to edit the ***.htacces*** file (KITT_TLD and KITT_SLD constants).
 
-Note, the `WP_DEBUG_LOG` constant is set to `/storage/logs/wp_error.log` if you use docker and want to see the WordPress error logs after you call the `docker logs -f <container> >/dev/null` command for php logs. Set the path to `/dev/stderr` and the WordPress error logs should be visible.
+Note, the `WP_DEBUG_LOG` constant is set to `/storage/logs/wp_error.log` if you use **Docker** and want to see the WordPress error logs after you call the `docker logs -f <container> >/dev/null` command for php logs. Set the path to `/dev/stderr` and the WordPress error logs should be visible.
 
 ---
 

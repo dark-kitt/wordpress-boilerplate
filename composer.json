@@ -119,7 +119,7 @@
       "name=$(basename $PWD); if [ ! -f ./web/app/themes/$name/header.php ]; then echo \"<!DOCTYPE html>\n<html>\n\t<head>\n\t\t<meta charset=\"utf-8\"/>\n\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1\"/>\n\t\t<title>Vue.js WordPress Theme</title>\n\t</head>\n\t<body>\n\t\t<header></header>\" > ./web/app/themes/$name/header.php; fi",
       "name=$(basename $PWD); if [ ! -f ./web/app/themes/$name/index.php ]; then echo \"<main></main>\" > ./web/app/themes/$name/index.php; fi",
       "name=$(basename $PWD); if [ ! -f ./web/app/themes/$name/footer.php ]; then echo \"\t\t<footer></footer>\n\t</body>\n</html>\" > ./web/app/themes/$name/footer.php; fi",
-      "name=$(basename $PWD); if [ ! -f ./web/app/themes/$name/functions.php ]; then cp ./web/app/mu-plugins/wordpress-theme-configuration/example.functions.php ./web/app/themes/$name/functions.php; fi"
+      "name=$(basename $PWD); if [ ! -f ./web/app/themes/$name/functions.php ]; then cp ./web/app/mu-plugins/wordpress-theme-configuration/example.functions.php ./web/app/themes/$name/example.functions.php && echo '<?php\n/**\n * customize your theme here\n * take a look in the example.functions.php file\n * copy paste useful stuff or just for tryouts\n */' > ./web/app/themes/$name/functions.php; fi"
     ],
     "clear-theme-configuration": [
       "if [ -f ./web/app/mu-plugins/wordpress-theme-configuration/.gitignore ]; then rm -f ./web/app/mu-plugins/wordpress-theme-configuration/.gitignore; fi",
