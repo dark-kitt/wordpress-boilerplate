@@ -11,7 +11,7 @@ The backend is basically configured by a "**[must use plugin](https://github.com
 
 The **[base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue)** and the  WordPress base configuration "must use plugin" are loaded from a **private repository** (VCS | Version Control System). Additionally, to load MU-Plugins from subdirectories Composer adds an **[autoloader for MU-Plugins](https://github.com/dark-kitt/wordpress-mu-plugin-autoloader)** (*`app/mu-plugin/wordpress-mu-plugin-autoloader`*), which is also loaded from a private repository. WordPress only looks for PHP files right inside the MU-Plugins directory, and not for files in subdirectories (unlike for normal plugins).
 
-Note, that edited files in the VCS directories can be overwritten after an update. Useful plugins and Composer scripts are available or editable inside the composer.json file.
+Note: That edited files in the VCS directories can be overwritten after an update. Useful plugins and Composer scripts are available or editable inside the composer.json file.
 
 ### Requirements
 
@@ -37,7 +37,7 @@ The **WordPress Salts** in the .env file are fetched and placed automatically.
 
 **JWT Authentication**
 
-The secret key in the .env file for **JWT Authentication for WP REST API** is created and placed automatically, for each project / install. Note, it is optional to use the **custom WordPress REST API** from the [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin.
+The secret key in the .env file for **JWT Authentication for WP REST API** is created and placed automatically, for each project / install. Note: It is optional to use the **custom WordPress REST API** from the [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin.
 
 **Docker**
 
@@ -60,7 +60,7 @@ Copy or fetch the composer.json file in your project root directory and run **co
 * run **composer update** or **composer install** to generate the required files
 * set up ***.env*** variables and the `KITT_TLD` and `KITT_SLD` constants in the ***.htaccess*** file
 
-Note, for a specific commit of your VCS Repo `"require": { "vendor/repo_name": "dev-main#eec8698" }` (branch#commit).
+Note: For a specific commit of your VCS Repo `"require": { "vendor/repo_name": "dev-main#eec8698" }` (branch#commit).
 
 To fetch the ***composer.json*** file directly in your project root directory, you can use the following curl command.
 ```shell
@@ -170,13 +170,13 @@ composer show -i (installed packages)
 
 Replace the existing default values with your specific project configuration. The **WordPress Salts** and the secret key for **JWT Authentication for WP REST API** are created and placed automatically (keys for each installation).
 
-Note, the secret key for **JWT Authentication for WP REST API** is required for the **custom WordPress REST API** [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin. If you won't use the **custom WordPress REST API** Method from the **wordpress-theme-configuration** MU-Plugin, you can ignore the secret key or use it on your own.
+Note: The secret key for **JWT Authentication for WP REST API** is required for the **custom WordPress REST API** [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin. If you won't use the **custom WordPress REST API** Method from the **wordpress-theme-configuration** MU-Plugin, you can ignore the secret key or use it on your own.
 
 Note additionally, if you use the example Apache configuration above `WP_HOME` (http://example.dev) can not be equal to `WP_SITEURL` (http://api.example.dev/wp), because of the custom WordPress REST API, which is defined by the [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin. The `ENV_SITEURL` (http://api.example.dev/) constant is used to configure other additional stuff.
 
 Don't forget to edit the ***.htacces*** file (KITT_TLD and KITT_SLD constants).
 
-Note, the `WP_DEBUG_LOG` constant is set to `/storage/logs/wp_error.log` if you use **Docker** and want to see the WordPress error logs after you call the `docker logs -f <container> >/dev/null` command for php logs. Set the path to `/dev/stderr` and the WordPress error logs should be visible.
+Note: The `WP_DEBUG_LOG` constant is set to `/storage/logs/wp_error.log` if you use **Docker** and want to see the WordPress error logs after you call the `docker logs -f <container> >/dev/null` command for php logs. Set the path to `/dev/stderr` and the WordPress error logs should be visible.
 
 ---
 
@@ -194,7 +194,7 @@ The htpasswd-www or htpasswd-web script adds a ***.htpasswd*** file in the *`/ww
 
 To edit the **user** and the **password** information, open the composer.json file and replace **user** and **password** with your specific login data inside of the **`htpasswd-www`** ([**146,135**]) or **`htpasswd-web`** ([**141,79**]) script.
 
-Note, don't push your ***.htpasswd*** and ***.htacces*** files with your local **AuthUserFile** information to the live server.
+Note: Don't push your ***.htpasswd*** and ***.htacces*** files with your local **AuthUserFile** information to the live server.
 
 ---
 
@@ -210,7 +210,7 @@ set-up-project creates *`.env`*, *`./web/index.php`*, *`./web/wp-config.php`*, *
 composer default-env-file
 ```
 
-creates the default ***.env*** in the root directory of this project. Note, if a ***.env*** file already exists, this script will overwrite the existing one.
+creates the default ***.env*** in the root directory of this project. Note: If a ***.env*** file already exists, this script will overwrite the existing one.
 
 ---
 
@@ -218,7 +218,7 @@ creates the default ***.env*** in the root directory of this project. Note, if a
 composer default-index-file
 ```
 
-creates the default ***index.php*** file in the *`/web/`* directory of this project. Note, if an ***index.php*** file already exists, this script will overwrite the existing one.
+creates the default ***index.php*** file in the *`/web/`* directory of this project. Note: If an ***index.php*** file already exists, this script will overwrite the existing one.
 
 ---
 
@@ -226,7 +226,7 @@ creates the default ***index.php*** file in the *`/web/`* directory of this proj
 composer default-wp-config-file
 ```
 
-creates the default ***wp-config.php*** file in the *`/web/`* directory of this project. Note, if a ***wp-config.php*** file already exists, this script will overwrite the existing one.
+creates the default ***wp-config.php*** file in the *`/web/`* directory of this project. Note: If a ***wp-config.php*** file already exists, this script will overwrite the existing one.
 
 ---
 
@@ -234,7 +234,7 @@ creates the default ***wp-config.php*** file in the *`/web/`* directory of this 
 composer default-htaccess-file
 ```
 
-creates the default ***.htaccess*** file in the *`/web/`* directory of this project. Note, if a ***.htaccess*** file already exists, this script will overwrite the existing one.
+creates the default ***.htaccess*** file in the *`/web/`* directory of this project. Note: If a ***.htaccess*** file already exists, this script will overwrite the existing one.
 
 ---
 

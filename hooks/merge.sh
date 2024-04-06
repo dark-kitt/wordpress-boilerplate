@@ -3,7 +3,7 @@
 MERGE_REQUIRED=false
 for file_path in $(git diff --cached --name-only)
 do
-  if [[ $file_path == *"scripts/"* ]]; then
+  if [[ $file_path == *"scripts/"* || $file_path == "composer.json"* ]]; then
     MERGE_REQUIRED=true
   fi
 done
