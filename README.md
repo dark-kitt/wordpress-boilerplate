@@ -64,15 +64,15 @@ Note: For a specific commit of your VCS Repo `"require": { "vendor/repo_name": "
 
 To fetch the ***composer.json*** file directly in your project root directory, you can use the following curl command.
 ```shell
-curl --header "PRIVATE-TOKEN: <your_access_token>" "https://#" > composer.json
+curl --header "PRIVATE-TOKEN: <github_access_token>" "https://github.com/dark-kitt/wordpress-boilerplate/tree/main" > composer.json
 ```
-Or save your private access token in a curl header file, e.g. *`~/.curl/gitlab`* and include your specific header into your command.
+Or save your private access token in a curl header file, e.g. *`~/.curl/github`* and include your specific header into your command.
 ```text
-# ~/.curl/gitlab
-PRIVATE-TOKEN: <your_access_token>
+# ~/.curl/github
+PRIVATE-TOKEN: <github_access_token>
 ```
 ```shell
-curl --H @"$HOME/.curl/gitlab" "https://#" > composer.json
+curl -H @"$HOME/.curl/github" "https://github.com/dark-kitt/wordpress-boilerplate/tree/main" > composer.json
 ```
 
 **composer cmds**
