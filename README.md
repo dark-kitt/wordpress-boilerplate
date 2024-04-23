@@ -178,11 +178,11 @@ Replace the existing default values with your specific project configuration. Th
 
 Note: The secret key for **JWT Authentication for WP REST API** is required for the **custom WordPress REST API** [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin. If you won't use the **custom WordPress REST API** Method from the **wordpress-theme-configuration** MU-Plugin, you can ignore the secret key or use it on your own.
 
-Note additionally, if you use the example Apache configuration above `WP_HOME` (http://example.dev) can not be equal to `WP_SITEURL` (http://api.example.dev/wp), because of the custom WordPress REST API, which is defined by the [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin. The `ENV_SITEURL` (http://api.example.dev/) constant is used to configure other additional stuff.
+Note: Additionally, if you use the example Apache configuration above `WP_HOME` (http://example.dev) can not be equal to `WP_SITEURL` (http://api.example.dev/wp), because of the custom WordPress REST API, which is defined by the [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin. The `ENV_SITEURL` (http://api.example.dev/) constant is used to configure other additional stuff.
 
 Don't forget to edit the ***.htacces*** file (KITT_TLD and KITT_SLD constants).
 
-Note: The `WP_DEBUG_LOG` constant is set to `/storage/logs/wp_error.log` if you use **Docker** and want to see the WordPress error logs after you call the `docker logs -f <container> >/dev/null` command for php logs. Set the path to `/dev/stderr` and the WordPress error logs should be visible.
+Note: The `WP_DEBUG_LOG` constant is set to `/storage/logs/wp_error.log`. If you use **Docker** and want to see the WordPress error logs after you called the `docker logs -f <container> >/dev/null` command for php logs. Set the path to `/dev/stderr` and the WordPress error logs should be visible.
 
 ---
 
