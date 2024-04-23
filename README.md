@@ -5,9 +5,9 @@ Project: [**Part 1**](https://github.com/dark-kitt/wordpress-boilerplate/tree/ma
 
 ## Introduction
 
-This Composer configuration creates a preconfigured WordPress backend.
+This Composer configuration sets up a base project structure, that includes a WordPress backend with a configuration plugin and a custom base theme.
 
-The backend is basically configured by a "**[must use plugin](https://github.com/dark-kitt/wordpress-theme-configuration)**" (*`app/mu-plugin/wordpress-theme-configuration`*) and the ***.env*** file in the root directory. Composer creates a copy of a [base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue) (*`app/themes/wordpress-theme-vue`*) with the same name as the root directory. This theme directory will be the working directory for the custom WordPress theme.
+While setting up the project, Composer creates a copy of a base Vue.js theme (app/themes/wordpress-theme-vue) with the same name as the root directory. Configure the backend system as usual with the functions.php file inside of the theme directory with the "**[must use plugin](https://github.com/dark-kitt/wordpress-theme-configuration)**" methods (*`app/mu-plugin/wordpress-theme-configuration`*) and the ***.env*** file in the root directory.
 
 The **[base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue)** and the  WordPress base configuration "must use plugin" are loaded from a **private repository** (VCS | Version Control System). Additionally, to load MU-Plugins from subdirectories Composer adds an **[autoloader for MU-Plugins](https://github.com/dark-kitt/wordpress-mu-plugin-autoloader)** (*`app/mu-plugin/wordpress-mu-plugin-autoloader`*), which is also loaded from a private repository. WordPress only looks for PHP files right inside the MU-Plugins directory, and not for files in subdirectories (unlike for normal plugins).
 
