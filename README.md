@@ -23,6 +23,7 @@ Note: That edited files in the VCS directories can be overwritten after an updat
 **Getting Started**
 
 If you need an example project to handle this configuration, please checkout my [Getting Started!](https://github.com/dark-kitt/wordpress-theme-vue/tree/main?tab=readme-ov-file#getting-started) in [Part 3](https://github.com/dark-kitt/wordpress-theme-vue).
+
 **ACF Pro**
 
 If you want to use ACF Pro and have an **existing key**, please update the `"dist": {.. "url": "https:..&k=<<ACF_KEY>>.." }` key inside of the composer.json file (~[**24,99**]). Replace **`<<ACF_KEY>>`** with your own key. If you won't use ACF Pro, you can delete the ACF Pro requirements with:
