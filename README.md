@@ -5,13 +5,13 @@ Project: [**Part 1**](https://github.com/dark-kitt/wordpress-boilerplate/tree/ma
 
 ## Introduction
 
-This Composer configuration creates a preconfigured WordPress backend.
+This Composer configuration sets up a base project structure, that includes a WordPress backend with a configuration plugin and a custom base theme.
 
-The backend is basically configured by a "**[must use plugin](https://github.com/dark-kitt/wordpress-theme-configuration)**" (*`app/mu-plugin/wordpress-theme-configuration`*) and the ***.env*** file in the root directory. Composer creates a copy of a [base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue) (*`app/themes/wordpress-theme-vue`*) with the same name as the root directory. This theme directory will be the working directory for the custom WordPress theme.
+While setting up the project, Composer creates a copy of a **[base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue)** (*`app/themes/wordpress-theme-vue`*) with the same name as the root directory. Use the **`.env`** file in the root directory to define the environment variables and configure the backend system with the [**configuration plugin methods**](https://github.com/dark-kitt/wordpress-theme-configuration) (*`app/mu-plugin/wordpress-theme-configuration`*), as usual, inside of the **`functions.php`** file, that is located in the theme directory.
 
 The **[base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue)** and the  WordPress base configuration "must use plugin" are loaded from a **private repository** (VCS | Version Control System). Additionally, to load MU-Plugins from subdirectories Composer adds an **[autoloader for MU-Plugins](https://github.com/dark-kitt/wordpress-mu-plugin-autoloader)** (*`app/mu-plugin/wordpress-mu-plugin-autoloader`*), which is also loaded from a private repository. WordPress only looks for PHP files right inside the MU-Plugins directory, and not for files in subdirectories (unlike for normal plugins).
 
-Note: That edited files in the VCS directories can be overwritten after an update. Useful plugins and Composer scripts are available or editable inside the composer.json file.
+Note: That edited files in the VCS directories can be overwritten after an update. Useful plugins and Composer scripts are available or editable inside the **`composer.json`** file.
 
 ### Requirements
 
@@ -22,22 +22,24 @@ Note: That edited files in the VCS directories can be overwritten after an updat
 
 **ACF Pro**
 
-If you want to use ACF Pro and have an **existing key**, please update the `"dist": {.. "url": "https:..&k=<<ACF_KEY>>.." }` key inside of the composer.json file (~[**24,99**]). Replace **`<<ACF_KEY>>`** with your own key. If you won't use ACF Pro, you can delete the ACF Pro requirements with:
+If you want to use ACF Pro and have an **existing key**, please update the `"dist": {.. "url": "https:..&k=<<ACF_KEY>>.." }` key inside of the composer.json file (~[**25,89**]). Replace **`<<ACF_KEY>>`** with your own key. If you **won't use ACF Pro**, you can delete the ACF Pro requirements with:
 ```shell
 composer config --unset repositories.advanced-custom-fields/advanced-custom-fields-pro && composer remove advanced-custom-fields/advanced-custom-fields-pro
 ```
 
 **Maria DB**
 
-The requirements for the database are defined in the ***.env*** file. WordPress creates the **database** automatically if the database does not exist. Otherwise, **WordPress** loads the existing database.
+The requirements for the database are defined in the **`.env`** file. WordPress creates the **database** automatically if the database does not exist. Otherwise, **WordPress** loads the existing database.
 
 **WordPress Salts**
 
-The **WordPress Salts** in the .env file are fetched and placed automatically.
+The **WordPress Salts** in the .env file are fetched and placed automatically, for each project/installation.
 
 **JWT Authentication**
 
-The secret key in the .env file for **JWT Authentication for WP REST API** is created and placed automatically, for each project / install. Note: It is optional to use the **custom WordPress REST API** from the [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin.
+The secret key in the .env file for **JWT Authentication for WP REST API** is created and placed automatically, for each project/installation.
+
+Note: It is optional to use the **custom WordPress REST API** from the [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin.
 
 **Docker**
 
@@ -45,14 +47,14 @@ If you need a tiny Docker setup to test the project, checkout my [Docker PHP:8.2
 
 **Custom Hooks**
 
-To work with the custom hook directory, you need to set the **`hooksPath`** inside the **`git config`**, after each clone. To do so, you need to call the follwing command. Afterwards, you can work with custom GutHub hooks inside the *`./hooks`* directory.
+To work with the custom hook directory, you need to set the **`hooksPath`** inside the **`git config`**, after each clone. To do so, you need to call the following command. Afterward, you can work with custom GutHub hooks inside the *`./hooks`* directory.
 ```shell
 git config core.hooksPath hooks
 ```
 
-**Getting Started**
+**Getting Started!**
 
-If you need an example project to work with this configuration, please checkout my [Getting Started!](https://github.com/dark-kitt/wordpress-theme-vue/tree/main?tab=readme-ov-file#getting-started) in [Part 3](https://github.com/dark-kitt/wordpress-theme-vue).
+If you need an example project to work with this configuration, please checkout my [**Getting Started!**](https://github.com/dark-kitt/wordpress-theme-vue/tree/main?tab=readme-ov-file#getting-started) in [Part 3](https://github.com/dark-kitt/wordpress-theme-vue).
 
 ---
 
@@ -176,11 +178,11 @@ Replace the existing default values with your specific project configuration. Th
 
 Note: The secret key for **JWT Authentication for WP REST API** is required for the **custom WordPress REST API** [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin. If you won't use the **custom WordPress REST API** Method from the **wordpress-theme-configuration** MU-Plugin, you can ignore the secret key or use it on your own.
 
-Note additionally, if you use the example Apache configuration above `WP_HOME` (http://example.dev) can not be equal to `WP_SITEURL` (http://api.example.dev/wp), because of the custom WordPress REST API, which is defined by the [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin. The `ENV_SITEURL` (http://api.example.dev/) constant is used to configure other additional stuff.
+Note: Additionally, if you use the example Apache configuration above `WP_HOME` (http://example.dev) can not be equal to `WP_SITEURL` (http://api.example.dev/wp), because of the custom WordPress REST API, which is defined by the [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin. The `ENV_SITEURL` (http://api.example.dev/) constant is used to configure other additional stuff.
 
 Don't forget to edit the ***.htacces*** file (KITT_TLD and KITT_SLD constants).
 
-Note: The `WP_DEBUG_LOG` constant is set to `/storage/logs/wp_error.log` if you use **Docker** and want to see the WordPress error logs after you call the `docker logs -f <container> >/dev/null` command for php logs. Set the path to `/dev/stderr` and the WordPress error logs should be visible.
+Note: The `WP_DEBUG_LOG` constant is set to `/storage/logs/wp_error.log`. If you use **Docker** and want to see the WordPress error logs after you called the `docker logs -f <container> >/dev/null` command for php logs. Set the path to `/dev/stderr` and the WordPress error logs should be visible.
 
 ---
 
