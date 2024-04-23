@@ -7,7 +7,7 @@ Project: [**Part 1**](https://github.com/dark-kitt/wordpress-boilerplate/tree/ma
 
 This Composer configuration sets up a base project structure, that includes a WordPress backend with a configuration plugin and a custom base theme.
 
-While setting up the project, Composer creates a copy of a base Vue.js theme (app/themes/wordpress-theme-vue) with the same name as the root directory. Configure the backend system as usual with the functions.php file inside of the theme directory with the "**[must use plugin](https://github.com/dark-kitt/wordpress-theme-configuration)**" methods (*`app/mu-plugin/wordpress-theme-configuration`*) and the ***.env*** file in the root directory.
+While setting up the project, Composer creates a copy of a **[base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue)** (*`app/themes/wordpress-theme-vue`*) with the same name as the root directory. Configure the backend system as usual with the ***`functions.php`*** file inside of the theme directory with the "**[must use plugin](https://github.com/dark-kitt/wordpress-theme-configuration)**" methods (*`app/mu-plugin/wordpress-theme-configuration`*) and the ***`.env`*** file in the root directory.
 
 The **[base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue)** and the  WordPress base configuration "must use plugin" are loaded from a **private repository** (VCS | Version Control System). Additionally, to load MU-Plugins from subdirectories Composer adds an **[autoloader for MU-Plugins](https://github.com/dark-kitt/wordpress-mu-plugin-autoloader)** (*`app/mu-plugin/wordpress-mu-plugin-autoloader`*), which is also loaded from a private repository. WordPress only looks for PHP files right inside the MU-Plugins directory, and not for files in subdirectories (unlike for normal plugins).
 
@@ -22,7 +22,7 @@ Note: That edited files in the VCS directories can be overwritten after an updat
 
 **ACF Pro**
 
-If you want to use ACF Pro and have an **existing key**, please update the `"dist": {.. "url": "https:..&k=<<ACF_KEY>>.." }` key inside of the composer.json file (~[**24,99**]). Replace **`<<ACF_KEY>>`** with your own key. If you won't use ACF Pro, you can delete the ACF Pro requirements with:
+If you want to use ACF Pro and have an **existing key**, please update the `"dist": {.. "url": "https:..&k=<<ACF_KEY>>.." }` key inside of the composer.json file (~[**25,89**]). Replace **`<<ACF_KEY>>`** with your own key. If you won't use ACF Pro, you can delete the ACF Pro requirements with:
 ```shell
 composer config --unset repositories.advanced-custom-fields/advanced-custom-fields-pro && composer remove advanced-custom-fields/advanced-custom-fields-pro
 ```
@@ -45,7 +45,7 @@ If you need a tiny Docker setup to test the project, checkout my [Docker PHP:8.2
 
 **Custom Hooks**
 
-To work with the custom hook directory, you need to set the **`hooksPath`** inside the **`git config`**, after each clone. To do so, you need to call the follwing command. Afterwards, you can work with custom GutHub hooks inside the *`./hooks`* directory.
+To work with the custom hook directory, you need to set the **`hooksPath`** inside the **`git config`**, after each clone. To do so, you need to call the following command. Afterward, you can work with custom GutHub hooks inside the *`./hooks`* directory.
 ```shell
 git config core.hooksPath hooks
 ```
