@@ -17,8 +17,8 @@ Note: That edited files in the VCS directories can be overwritten after an updat
 
 * [Composer: ^2.*](https://getcomposer.org/download/)
 * [PHP: ^7.*](https://www.php.net/manual/de/mysql-xdevapi.installation.php)
-* [Maria DB: ^10.*](https://mariadb.com/de/resources/blog/installing-mariadb-10-on-centos-7-rhel-7/)
-* [Apache: ^2.4.*](https://mariadb.com/de/resources/blog/installing-mariadb-10-on-centos-7-rhel-7/)
+* [Maria DB: ^10.*](https://mariadb.com/) || [MySQL: ^8.*](https://www.mysql.com/)
+* [Apache: ^2.4.*](https://httpd.apache.org/)
 
 **ACF Pro**
 
@@ -33,11 +33,11 @@ The requirements for the database are defined in the **`.env`** file. WordPress 
 
 **WordPress Salts**
 
-The **WordPress Salts** in the .env file are fetched and placed automatically, for each project/installation.
+The WordPress Salts in the **`.env`** file are fetched and placed automatically, for `each project/installation`.
 
 **JWT Authentication**
 
-The secret key in the .env file for **JWT Authentication for WP REST API** is created and placed automatically, for each project/installation.
+The secret key in the **`.env`** file for JWT Authentication for WP REST API is created and placed automatically, for `each project/installation`.
 
 Note: It is optional to use the **custom WordPress REST API** from the [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin.
 
@@ -62,7 +62,7 @@ If you need an example project to work with this configuration, please checkout 
 
 Copy or fetch the composer.json file in your project root directory and run **composer update** to generate the required ***composer.lock*** file. Or install all the required files with the command **composer install** in your terminal, if the composer.lock file already exists. After the installation is done, edit the ***.env*** and ***.htaccess*** file and start creating your custom WordPress theme.
 
-* copy-paste or fetch and update the ***composer.json*** file in your project root directory
+* copy-paste or fetch the ***composer.json*** file in your project root directory
 * run **composer update** or **composer install** to generate the required files
 * set up ***.env*** variables and the `KITT_TLD` and `KITT_SLD` constants in the ***.htaccess*** file
 
@@ -85,7 +85,7 @@ curl -H @"$HOME/.curl/github" "https://raw.githubusercontent.com/dark-kitt/wordp
 ```shell
 composer install
 composer update
-
+# package control
 composer require verdor/package
 composer remove verdor/package
 
@@ -180,9 +180,9 @@ Note: The secret key for **JWT Authentication for WP REST API** is required for 
 
 Note: Additionally, if you use the example Apache configuration above `WP_HOME` (http://example.dev) can not be equal to `WP_SITEURL` (http://api.example.dev/wp), because of the custom WordPress REST API, which is defined by the [wordpress-theme-configuration](https://github.com/dark-kitt/wordpress-theme-configuration) MU-Plugin. The `ENV_SITEURL` (http://api.example.dev/) constant is used to configure other additional stuff.
 
-Don't forget to edit the ***.htacces*** file (KITT_TLD and KITT_SLD constants).
+Don't forget to edit the ***.htacces*** file (`KITT_TLD` and `KITT_SLD` constants).
 
-Note: The `WP_DEBUG_LOG` constant is set to `/storage/logs/wp_error.log`. If you use **Docker** and want to see the WordPress error logs after you called the `docker logs -f <container> >/dev/null` command for php logs. Set the path to `/dev/stderr` and the WordPress error logs should be visible.
+Note: The `WP_DEBUG_LOG` constant is set to `/storage/logs/wp_error.log`. If you use **Docker** and want to see the `WordPress error logs` after you called the `docker logs -f <container> >/dev/null` command for php logs. Set the path to `/dev/stderr` and the WordPress error logs should be visible.
 
 ---
 
@@ -198,7 +198,7 @@ composer htpasswd-web
 
 The htpasswd-www or htpasswd-web script adds a ***.htpasswd*** file in the *`/www`* directory of the theme or in the *`/web`* directory of this project. Additionally, the scripts will also add a ***.htacces*** file with the required information to each directory, if it doesn't exist. If it exists **`htpasswd-www`** or **`htpasswd-web`** will only add the required information **at the end** of the file.
 
-To edit the **user** and the **password** information, open the composer.json file and replace **user** and **password** with your specific login data inside of the **`htpasswd-www`** ([**146,135**]) or **`htpasswd-web`** ([**141,79**]) script.
+To edit the **user** and the **password** information, open the composer.json file and replace **user** and **password** with your specific login data inside of the **`htpasswd-www`** ([**145,135**]) or **`htpasswd-web`** ([**140,79**]) script.
 
 Note: Don't push your ***.htpasswd*** and ***.htacces*** files with your local **AuthUserFile** information to the live server.
 
@@ -248,7 +248,7 @@ creates the default ***.htaccess*** file in the *`/web/`* directory of this proj
 composer default-base-theme-files
 ```
 
-copies the **[base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue)** into the same directory (*`app/themes/$name`*) with the name as the root directory. Afterwards, it creates all necessary default files for WordPress if they don't already exist.
+copies the **[base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue)** in the same directory (*`app/themes/$name`*) with the name as the root directory. Afterwards, it creates all necessary default files for WordPress if they don't already exist.
 
 ---
 
