@@ -9,9 +9,9 @@ This Composer configuration sets up a base project structure, that includes a Wo
 
 While setting up the project, Composer creates a copy of a **[base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue)** (*`app/themes/wordpress-theme-vue`*) with the same name as the root directory. Use the **`.env`** file in the root directory to define the environment variables and configure the backend system with the [**configuration plugin methods**](https://github.com/dark-kitt/wordpress-theme-configuration) (*`app/mu-plugin/wordpress-theme-configuration`*), as usual, inside of the **`functions.php`** file, that is located in the theme directory.
 
-The **[base Vue.js theme](https://github.com/dark-kitt/wordpress-theme-vue)** and the  WordPress base configuration "must use plugin" are loaded from a **private repository** (VCS | Version Control System). Additionally, to load MU-Plugins from subdirectories Composer adds an **[autoloader for MU-Plugins](https://github.com/dark-kitt/wordpress-mu-plugin-autoloader)** (*`app/mu-plugin/wordpress-mu-plugin-autoloader`*), which is also loaded from a private repository. WordPress only looks for PHP files right inside the MU-Plugins directory, and not for files in subdirectories (unlike for normal plugins).
+Additionally, to load MU-Plugins from subdirectories Composer adds an **[autoloader for MU-Plugins](https://github.com/dark-kitt/wordpress-mu-plugin-autoloader)** (*`app/mu-plugin/wordpress-mu-plugin-autoloader.php`*). WordPress only looks for PHP files right inside the MU-Plugins directory, and not for files in subdirectories (unlike for normal plugins).
 
-Note: That edited files in the VCS directories can be overwritten after an update. Useful plugins and Composer scripts are available or editable inside the **`composer.json`** file.
+Note: Useful plugins and Composer scripts are available or editable inside the **`composer.json`** file.
 
 ### Requirements
 
@@ -60,13 +60,11 @@ If you need an example project to work with this configuration, please checkout 
 
 ## Installation
 
-Copy or fetch the composer.json file in your project root directory and run **composer update** to generate the required ***composer.lock*** file. Or install all the required files with the command **composer install** in your terminal, if the composer.lock file already exists. After the installation is done, edit the ***.env*** and ***.htaccess*** file and start creating your custom WordPress theme.
+Copy or fetch the **`composer.json`** file in your project root directory and run **composer update** to generate the required ***composer.lock*** file. Or install all the required files with the command **composer install** in your terminal, if the composer.lock file already exists. After the installation is done, edit the ***.env*** and ***.htaccess*** file and start creating your custom WordPress theme.
 
 * copy-paste or fetch the ***composer.json*** file in your project root directory
 * run **composer update** or **composer install** to generate the required files
 * set up ***.env*** variables and the `KITT_TLD` and `KITT_SLD` constants in the ***.htaccess*** file
-
-Note: For a specific commit of your VCS Repo `"require": { "vendor/repo_name": "dev-main#eec8698" }` (branch#commit).
 
 To fetch the ***composer.json*** file directly in your project root directory, you can use the following curl command.
 ```shell
@@ -81,7 +79,7 @@ PRIVATE-TOKEN: <github_access_token>
 curl -H @"$HOME/.curl/github" "https://raw.githubusercontent.com/dark-kitt/wordpress-boilerplate/main/composer.json" > composer.json
 ```
 
-**composer cmds**
+**common composer cmds**
 ```shell
 composer install
 composer update
@@ -97,7 +95,7 @@ composer clear-cache
 composer show -i (installed packages)
 ```
 
-**vhosts.conf**
+**example vhosts.conf**
 ```apacheconf
 # Tiny example vhosts config file
 <VirtualHost *:80>
