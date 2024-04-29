@@ -88,7 +88,8 @@
     ],
     "set-up-project": [
       "if [ ! -d ./web/app/themes ]; then mkdir -p ./web/app/themes; fi",
-      "if [[ $( composer show | grep dark-kitt/wordpress-theme-vue ) &&  ! -d ./web/app/themes/$(basename $PWD) ]]; then composer run-script default-base-theme-files && composer run-script clear-base-theme; fi",
+      "if [[ $( composer show | grep dark-kitt/wordpress-theme-vue ) && ! -d ./web/app/themes/$(basename $PWD) ]]; then composer run-script default-base-theme-files && composer run-script clear-base-theme; fi",
+      "if [[ $( composer show | grep dark-kitt/wordpress-theme-vue ) && -d ./web/app/themes/$(basename $PWD) ]]; then rm -rf ./web/app/themes/wordpress-theme-vue; fi",
       "if [[ $( composer show | grep dark-kitt/wordpress-theme-configuration ) ]]; then composer run-script clear-theme-configuration; fi",
       "if [[ $( composer show | grep dark-kitt/wordpress-mu-plugin-autoloader ) ]]; then mv ./web/app/mu-plugins/wordpress-mu-plugin-autoloader/mu-plugin-autoloader.php ./web/app/mu-plugins/mu-plugin-autoloader.php && composer run-script clear-mu-autoloader; fi",
       "if [ ! -f .env ]; then composer run-script default-env-file; fi",
