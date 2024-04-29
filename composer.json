@@ -2,8 +2,7 @@
   "name": "dark-kitt/wordpress-boilerplate",
   "description": "A small WordPress boilerplate",
   "type": "project",
-  "license": "CC_BY-SA_4.0_DEED",
-  "version": "0.0.1",
+  "license": "CC-BY-4.0",
   "authors": [
     {
       "name": "dark-kitt"
@@ -25,25 +24,12 @@
           "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k=<<ACF_KEY>>&t=6.2.7"
         }
       }
-    },
-    "wordpress-theme-configuration": {
-      "type": "vcs",
-      "url": "https://github.com/dark-kitt/wordpress-theme-configuration"
-    },
-    "wordpress-mu-plugin-autoloader": {
-      "type": "vcs",
-      "url": "https://github.com/dark-kitt/wordpress-mu-plugin-autoloader"
-    },
-    "wordpress-theme-vue": {
-      "type": "vcs",
-      "url": "https://github.com/dark-kitt/wordpress-theme-vue"
     }
   },
   "require": {
     "advanced-custom-fields/advanced-custom-fields-pro": "^6.2.7",
-    "dark-kitt/wordpress-theme-configuration": "dev-main",
-    "dark-kitt/wordpress-mu-plugin-autoloader": "dev-main",
-    "dark-kitt/wordpress-theme-vue": "dev-main",
+    "dark-kitt/wordpress-theme-configuration": "^1.0",
+    "dark-kitt/wordpress-theme-vue": "^1.0",
     "roots/wordpress": "^6.4",
     "roots/wp-password-bcrypt": "^1.0.0",
     "vlucas/phpdotenv": "^5.3",
